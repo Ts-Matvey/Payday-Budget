@@ -14,6 +14,12 @@ public class PlayerController : MonoBehaviour
 
     public Transform cameraTransform;
 
+    [Range(0.01f, 1.0f)]
+    public float shakeDuration = 0.3f;
+
+    [Range(0, 1.0f)]
+    public float shakeAmount = 0.7f;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -40,6 +46,8 @@ public class PlayerController : MonoBehaviour
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             isGrounded = false;
             lastJumpTime = Time.time;
+
+            StartCoroutine(ShakeCamera());
         }
     }
 
@@ -50,4 +58,31 @@ public class PlayerController : MonoBehaviour
             isGrounded = true;
         }
     }
+
+    IEnumerator ShakeCamera()
+    {
+        float elapsed = 0f;
+
+        Vector3 originalCamPos = cameraTransform.localPosition;
+
+        while (elapsed < shakeDuration)
+        {
+            elapsed += Time.deltaTime;
+
+            float percentComplete = elapsed / shakeDuration;
+            float damper = 1.0f - Mathf.Clamp(4.0f * percentComplete - 3.0f, 0.0f, 1.0f);
+
+            float x = Random.value * 2.0f - 1.0f;
+            float y = Random.value * 2.0f - 1.0f;
+            x *= shakeAmount * damper;
+            y *= shakeAmount * damper;
+
+            cameraTransform.localPosition = new Vector3(x, y, originalCamPos.z);
+
+            yield return null;
+        }
+
+        cameraTransform.localPosition = originalCamPos;
+    }
+
 }

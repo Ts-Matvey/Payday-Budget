@@ -229,6 +229,7 @@ GameObject:
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
   - component: {fileID: 963194229}
+  - component: {fileID: 963194230}
   m_Layer: 0
   m_Name: Player Camera
   m_TagString: MainCamera
@@ -316,6 +317,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mouseSensitivity: 2000
   playerBody: {fileID: 2138582143}
+--- !u!114 &963194230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5c1e794117c84ff3befb05d3b4507d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shakeDuration: 0.5
+  shakeMagnitude: 0.1
+  dampingSpeed: 1
 --- !u!1 &1795551533
 GameObject:
   m_ObjectHideFlags: 0
@@ -531,6 +547,8 @@ MonoBehaviour:
   jumpForce: 5
   jumpDelay: 1
   cameraTransform: {fileID: 963194228}
+  shakeDuration: 1
+  shakeAmount: 1
 --- !u!54 &2138582145
 Rigidbody:
   m_ObjectHideFlags: 0
